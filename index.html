@@ -1,0 +1,796 @@
+<!--
+  Applin
+  built by Kaira, first product, first repo, first real commit.
+  otter mark hidden in the footer if you're reading this too closely.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nefelibata+Script&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF3E9;
+    --cream-deep: #F1E7D8;
+    --red: #C1382E;
+    --red-deep: #9E2C24;
+    --orange: #CB9A5C;
+    --brown: #6B4226;
+    --tan: #CB9A5C;
+    --green: #8FB85C;
+    --ink: #2B211B;
+    --ink-soft: #6E6156;
+    --line: #E3D6C4;
+    --white: #FFFDF9;
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .phone {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background: var(--cream);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    padding: 32px 28px 24px;
+    animation: fadein 0.35s ease;
+  }
+
+  .screen.active { display: flex; }
+
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screen { animation: none; }
+  }
+
+  /* ---------- Landing ---------- */
+  #screen-landing {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at 50% 30%, var(--cream-deep), var(--cream) 70%);
+  }
+
+  .apple-mark {
+    width: 72px;
+    height: 82px;
+    margin-bottom: 22px;
+  }
+
+  .wordmark {
+    font-family: 'Nefelibata Script', cursive;
+    font-size: 78px;
+    color: var(--red);
+    line-height: 1.35;
+    margin: 0 0 20px;
+    padding-bottom: 6px;
+  }
+
+  .tagline {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 44px;
+    letter-spacing: 0.01em;
+  }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    border-radius: 100px;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    width: 100%;
+  }
+
+  .btn-primary:hover { background: var(--red-deep); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--brown);
+    border: 1.5px solid var(--line);
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .landing-actions { width: 100%; }
+
+  #screen-landing { position: relative; }
+
+  .signature-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    color: var(--ink-soft);
+    opacity: 0.65;
+  }
+  .signature-footer span {
+    font-size: 13px;
+    letter-spacing: 0.01em;
+  }
+  .footer-heart {
+    color: var(--red);
+    font-size: 13px;
+  }
+
+  /* ---------- Shared screen chrome ---------- */
+  .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .back-btn {
+    background: none;
+    border: none;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    padding: 6px 0;
+  }
+
+  .step-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  h1.screen-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--brown);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  p.screen-sub {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+    line-height: 1.5;
+  }
+
+  .field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brown);
+    margin: 0 0 8px;
+    display: block;
+  }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  input:focus, select:focus, button:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+  }
+
+  .field-row { display: flex; gap: 10px; }
+  .field-row > div { flex: 1; }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+
+  .spacer { flex: 1; }
+
+  /* ---------- QR screen ---------- */
+  .qr-box {
+    width: 190px;
+    height: 190px;
+    margin: 8px auto 22px;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .group-chip {
+    text-align: center;
+    font-size: 14px;
+    color: var(--brown);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .group-chip-sub {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+  }
+
+  .members-row {
+    display: flex;
+    gap: -8px;
+    margin-bottom: 4px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--tan);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--cream);
+    margin-left: -10px;
+  }
+  .members-row .avatar:first-child { margin-left: 0; }
+
+  /* ---------- Order entry ---------- */
+  .order-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .order-item:last-child { border-bottom: none; }
+  .order-item .name { flex: 1; font-size: 14.5px; }
+  .order-item .price { font-size: 14.5px; font-weight: 600; color: var(--brown); }
+  .order-item .remove {
+    background: none; border: none; color: var(--ink-soft);
+    font-size: 18px; cursor: pointer; line-height: 1; padding: 4px;
+  }
+
+  .add-row { display: flex; gap: 8px; }
+  .add-row input { margin-bottom: 0; }
+  .add-row input.item-name { flex: 2; }
+  .add-row input.item-price { flex: 1; }
+  .add-row .btn-add {
+    background: var(--brown);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    width: 46px;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .subtotal-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 14px;
+    margin-top: 6px;
+    border-top: 1.5px dashed var(--line);
+    font-weight: 700;
+    color: var(--brown);
+    font-size: 15px;
+  }
+
+  /* ---------- Receipt screen ---------- */
+  .receipt-drop {
+    border: 1.5px dashed var(--line);
+    border-radius: var(--radius);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 18px;
+    background: var(--white);
+  }
+  .receipt-drop .icon { font-size: 30px; display: block; margin-bottom: 10px; }
+
+  /* ---------- Split summary ---------- */
+  .split-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 7px 0;
+    color: var(--ink-soft);
+  }
+  .split-row.total {
+    color: var(--brown);
+    font-weight: 700;
+    font-size: 16px;
+    border-top: 1.5px dashed var(--line);
+    margin-top: 8px;
+    padding-top: 12px;
+  }
+
+  .member-total-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .member-total-card .who { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 600; }
+  .member-total-card .amt { font-weight: 700; color: var(--red); font-size: 15px; }
+
+  /* ---------- Reminder / tracking ---------- */
+  .tracker-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tracker-row:last-child { border-bottom: none; }
+  .tracker-who { display: flex; align-items: center; gap: 10px; }
+  .tracker-name { font-size: 14.5px; font-weight: 600; }
+  .tracker-amt { font-size: 12.5px; color: var(--ink-soft); }
+
+  .status-pill {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .status-pill.unpaid { background: #F3E3D8; color: var(--red); }
+  .status-pill.paid { background: #E4E9DA; color: var(--green); }
+
+  .remind-btn {
+    background: none;
+    border: 1.5px solid var(--line);
+    color: var(--brown);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 100px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+
+  /* ---------- dots nav ---------- */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    padding: 18px 0 26px;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .dot.on { background: var(--red); width: 18px; border-radius: 4px; }
+
+  .toast {
+    position: absolute;
+    left: 50%;
+    bottom: 90px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--brown);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 18px;
+    border-radius: 100px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- SCREEN 0: Landing -->
+  <div class="screen active" id="screen-landing">
+    <svg class="apple-mark" viewBox="0 0 100 112" fill="none">
+      <!-- leaf antennae -->
+      <path d="M50 40 C46 24, 38 12, 26 8 C28 22, 36 34, 50 40Z" fill="#9FC468" stroke="#2B211B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M50 40 C54 24, 62 12, 74 8 C72 22, 64 34, 50 40Z" fill="#8FB85C" stroke="#2B211B" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="34" cy="18" r="2.2" fill="#2B211B"/>
+      <circle cx="66" cy="18" r="2.2" fill="#2B211B"/>
+
+      <!-- body -->
+      <path d="M50 38 C74 38, 86 56, 86 74 C86 94, 70 106, 50 106 C30 106, 14 94, 14 74 C14 56, 26 38, 50 38 Z" fill="#C1382E" stroke="#2B211B" stroke-width="2"/>
+
+      <!-- tan base -->
+      <path d="M18 82 C22 98, 36 106, 50 106 C64 106, 78 98, 82 82 C74 90, 62 94, 50 94 C38 94, 26 90, 18 82 Z" fill="#CB9A5C" stroke="#2B211B" stroke-width="2" stroke-linejoin="round"/>
+
+      <!-- smile -->
+      <path d="M32 74 C36 84, 40 84, 42 74 C44 84, 48 86, 50 74 C52 86, 56 84, 58 74 C60 84, 64 84, 68 74" stroke="#2B211B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- shine -->
+      <ellipse cx="38" cy="52" rx="9" ry="6" fill="#E07A6B" opacity="0.55"/>
+
+      <!-- tail leaf -->
+      <path d="M84 86 C92 84, 96 90, 92 96 C88 100, 80 98, 78 92 C80 90, 82 88, 84 86Z" fill="#8FB85C" stroke="#2B211B" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+    <h1 class="wordmark">Applin</h1>
+    <p class="tagline">split it, don't sweat it</p>
+    <div class="landing-actions">
+      <button class="btn btn-primary" onclick="goTo('create')">start a group</button>
+      <button class="btn btn-ghost" onclick="goTo('join')">join with a code</button>
+    </div>
+    <div class="signature-footer">
+      <span>baked with</span>
+      <span class="footer-heart">&#9829;</span>
+      <span>by Kaira</span>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: Create group -->
+  <div class="screen" id="screen-create">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('landing')">&larr; back</button>
+      <span class="step-label">new group</span>
+    </div>
+    <h1 class="screen-title">Where are we eating?</h1>
+    <p class="screen-sub">This becomes your group's name. Easy for everyone to find later.</p>
+
+    <label class="field-label" for="restaurant">Restaurant or location</label>
+    <input type="text" id="restaurant" placeholder="e.g. Tiong Bahru Bakery" value="Tiong Bahru Bakery">
+
+    <div class="field-row">
+      <div>
+        <label class="field-label" for="mealdate">Date</label>
+        <input type="text" id="mealdate" value="14 Sep">
+      </div>
+      <div>
+        <label class="field-label" for="mealtype">Meal</label>
+        <select id="mealtype">
+          <option>Breakfast</option>
+          <option>Brunch</option>
+          <option selected>Lunch</option>
+          <option>Dinner</option>
+          <option>Supper</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <button class="btn btn-primary" onclick="goTo('qr')">generate QR code</button>
+  </div>
+
+  <!-- SCREEN JOIN -->
+  <div class="screen" id="screen-join">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('landing')">&larr; back</button>
+      <span class="step-label">join a group</span>
+    </div>
+    <h1 class="screen-title">Scan to join</h1>
+    <p class="screen-sub">Point your camera at the code your friend created.</p>
+    <div class="qr-box"><span style="font-size:13px;color:var(--ink-soft)">camera view</span></div>
+    <button class="btn btn-primary" onclick="goTo('order')">simulate scan</button>
+  </div>
+
+  <!-- SCREEN 2: QR generated -->
+  <div class="screen" id="screen-qr">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('create')">&larr; back</button>
+      <span class="step-label">your group</span>
+    </div>
+    <div class="group-chip" id="qr-group-name">Lunch · Tiong Bahru Bakery</div>
+    <div class="group-chip-sub" id="qr-group-sub">14 Sep</div>
+    <div class="qr-box">
+      <svg width="130" height="130" viewBox="0 0 130 130">
+        <rect width="130" height="130" fill="#FFFDF9"/>
+        <g fill="#2B211B">
+          <rect x="10" y="10" width="30" height="30"/><rect x="18" y="18" width="14" height="14" fill="#FFFDF9"/>
+          <rect x="90" y="10" width="30" height="30"/><rect x="98" y="18" width="14" height="14" fill="#FFFDF9"/>
+          <rect x="10" y="90" width="30" height="30"/><rect x="18" y="98" width="14" height="14" fill="#FFFDF9"/>
+          <rect x="50" y="10" width="8" height="8"/><rect x="66" y="10" width="8" height="8"/>
+          <rect x="50" y="26" width="8" height="8"/><rect x="66" y="34" width="8" height="8"/>
+          <rect x="50" y="50" width="8" height="8"/><rect x="66" y="50" width="8" height="8"/>
+          <rect x="82" y="50" width="8" height="8"/><rect x="50" y="66" width="8" height="8"/>
+          <rect x="90" y="66" width="8" height="8"/><rect x="106" y="66" width="8" height="8"/>
+          <rect x="50" y="82" width="8" height="8"/><rect x="70" y="90" width="8" height="8"/>
+          <rect x="90" y="90" width="8" height="8"/><rect x="106" y="90" width="8" height="8"/>
+          <rect x="50" y="106" width="8" height="8"/><rect x="70" y="106" width="8" height="8"/>
+        </g>
+      </svg>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--ink-soft);margin-bottom:20px;">friends scan this to join</p>
+    <div class="members-row" style="justify-content:center;margin-bottom:24px;">
+      <div class="avatar">K</div><div class="avatar" style="background:var(--brown)">A</div><div class="avatar" style="background:var(--green)">F</div>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn btn-primary" onclick="goTo('order')">everyone's in, continue</button>
+  </div>
+
+  <!-- SCREEN 3: Order entry -->
+  <div class="screen" id="screen-order">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('qr')">&larr; back</button>
+      <span class="step-label">your order</span>
+    </div>
+    <h1 class="screen-title">What did you have?</h1>
+    <p class="screen-sub">Add each item you personally ordered.</p>
+
+    <div class="card">
+      <div id="order-list"></div>
+      <div class="add-row" style="margin-top:10px;">
+        <input type="text" class="item-name" id="item-name-input" placeholder="Item name">
+        <input type="number" class="item-price" id="item-price-input" placeholder="$">
+        <button class="btn-add" onclick="addItem()" aria-label="Add item">+</button>
+      </div>
+      <div class="subtotal-row">
+        <span>your subtotal</span>
+        <span id="order-subtotal">$0.00</span>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+    <button class="btn btn-primary" onclick="goTo('receipt')">done ordering</button>
+  </div>
+
+  <!-- SCREEN 4: Receipt -->
+  <div class="screen" id="screen-receipt">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('order')">&larr; back</button>
+      <span class="step-label">receipt</span>
+    </div>
+    <h1 class="screen-title">Attach the receipt</h1>
+    <p class="screen-sub">Optional. Kept for the group's own record. Applin doesn't read it.</p>
+
+    <div class="receipt-drop" id="receipt-drop" onclick="attachReceipt()">
+      <span class="icon" id="receipt-icon">&#128247;</span>
+      <span id="receipt-text">tap to take a photo or upload one</span>
+    </div>
+
+    <div class="spacer"></div>
+    <button class="btn btn-primary" onclick="goTo('split')">see the split</button>
+    <button class="btn btn-ghost" onclick="goTo('split')">skip for now</button>
+  </div>
+
+  <!-- SCREEN 5: Split summary -->
+  <div class="screen" id="screen-split">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('receipt')">&larr; back</button>
+      <span class="step-label">the split</span>
+    </div>
+    <h1 class="screen-title">Here's what everyone owes</h1>
+    <p class="screen-sub">Service charge and GST are calculated on each person's own order.</p>
+
+    <div class="card">
+      <div class="split-row"><span>your food & drinks</span><span id="split-food">$0.00</span></div>
+      <div class="split-row"><span>service charge (10%)</span><span id="split-service">$0.00</span></div>
+      <div class="split-row"><span>GST (9%)</span><span id="split-gst">$0.00</span></div>
+      <div class="split-row total"><span>you owe</span><span id="split-total">$0.00</span></div>
+    </div>
+
+    <div class="card member-total-card">
+      <div class="who"><div class="avatar" style="width:28px;height:28px;font-size:11px;">A</div>Appletun</div>
+      <div class="amt">$18.20</div>
+    </div>
+    <div class="card member-total-card">
+      <div class="who"><div class="avatar" style="width:28px;height:28px;font-size:11px;background:var(--green)">F</div>Flapple</div>
+      <div class="amt">$26.75</div>
+    </div>
+
+    <div class="spacer"></div>
+    <button class="btn btn-primary" onclick="goTo('tracker')">I paid the bill</button>
+  </div>
+
+  <!-- SCREEN 6: Tracker -->
+  <div class="screen" id="screen-tracker">
+    <div class="top-row">
+      <button class="back-btn" onclick="goTo('split')">&larr; back</button>
+      <span class="step-label">tracking payments</span>
+    </div>
+    <h1 class="screen-title">Waiting on 2 friends</h1>
+    <p class="screen-sub">Mark someone as paid once you see it land in your account.</p>
+
+    <div class="card">
+      <div class="tracker-row">
+        <div class="tracker-who">
+          <div class="avatar">K</div>
+          <div>
+            <div class="tracker-name">You paid the bill</div>
+            <div class="tracker-amt">$68.90 total</div>
+          </div>
+        </div>
+        <span class="status-pill paid">payer</span>
+      </div>
+
+      <div class="tracker-row">
+        <div class="tracker-who">
+          <div class="avatar" style="background:var(--brown)">A</div>
+          <div>
+            <div class="tracker-name">Appletun</div>
+            <div class="tracker-amt">owes $18.20</div>
+          </div>
+        </div>
+        <div>
+          <button class="status-pill unpaid" id="pill-appletun" onclick="togglePaid('appletun')">unpaid</button>
+        </div>
+      </div>
+
+      <div class="tracker-row">
+        <div class="tracker-who">
+          <div class="avatar" style="background:var(--green)">F</div>
+          <div>
+            <div class="tracker-name">Flapple</div>
+            <div class="tracker-amt">owes $26.75</div>
+          </div>
+        </div>
+        <div>
+          <button class="status-pill unpaid" id="pill-flapple" onclick="togglePaid('flapple')">unpaid</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-ghost" onclick="sendReminders()">send a reminder to everyone unpaid</button>
+
+    <div class="spacer"></div>
+    <p style="text-align:center;font-size:12px;color:var(--ink-soft);">this is a prototype. payments happen outside Applin</p>
+  </div>
+
+  <div class="dots" id="dots"></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+  const screens = ['landing','create','join','qr','order','receipt','split','tracker'];
+  const dotScreens = ['landing','create','qr','order','receipt','split','tracker'];
+  let items = [];
+
+  function goTo(id) {
+    screens.forEach(s => document.getElementById('screen-' + s).classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    renderDots(id);
+    if (id === 'qr') {
+      const restaurant = document.getElementById('restaurant').value || 'your group';
+      const meal = document.getElementById('mealtype').value;
+      const date = document.getElementById('mealdate').value;
+      document.getElementById('qr-group-name').textContent = meal + ' · ' + restaurant;
+      document.getElementById('qr-group-sub').textContent = date;
+    }
+    window.scrollTo(0,0);
+  }
+
+  function renderDots(current) {
+    const dotsEl = document.getElementById('dots');
+    if (!dotScreens.includes(current)) { dotsEl.style.display = 'none'; return; }
+    dotsEl.style.display = 'flex';
+    dotsEl.innerHTML = dotScreens.map(s =>
+      `<div class="dot ${s === current ? 'on' : ''}"></div>`
+    ).join('');
+  }
+
+  function addItem() {
+    const nameInput = document.getElementById('item-name-input');
+    const priceInput = document.getElementById('item-price-input');
+    const name = nameInput.value.trim();
+    const price = parseFloat(priceInput.value);
+    if (!name || isNaN(price) || price <= 0) return;
+    items.push({ name, price });
+    nameInput.value = '';
+    priceInput.value = '';
+    nameInput.focus();
+    renderItems();
+  }
+
+  function removeItem(i) {
+    items.splice(i, 1);
+    renderItems();
+  }
+
+  function renderItems() {
+    const list = document.getElementById('order-list');
+    list.innerHTML = items.map((it, i) => `
+      <div class="order-item">
+        <span class="name">${it.name}</span>
+        <span class="price">$${it.price.toFixed(2)}</span>
+        <button class="remove" onclick="removeItem(${i})" aria-label="Remove ${it.name}">&times;</button>
+      </div>
+    `).join('');
+    const subtotal = items.reduce((sum, it) => sum + it.price, 0);
+    document.getElementById('order-subtotal').textContent = '$' + subtotal.toFixed(2);
+    updateSplit(subtotal);
+  }
+
+  function updateSplit(subtotal) {
+    const service = subtotal * 0.10;
+    const gst = (subtotal + service) * 0.09;
+    const total = subtotal + service + gst;
+    document.getElementById('split-food').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('split-service').textContent = '$' + service.toFixed(2);
+    document.getElementById('split-gst').textContent = '$' + gst.toFixed(2);
+    document.getElementById('split-total').textContent = '$' + total.toFixed(2);
+  }
+
+  function attachReceipt() {
+    document.getElementById('receipt-icon').textContent = '✓';
+    document.getElementById('receipt-text').textContent = 'receipt attached';
+    document.getElementById('receipt-drop').style.borderColor = 'var(--green)';
+  }
+
+  function togglePaid(who) {
+    const pill = document.getElementById('pill-' + who);
+    const isPaid = pill.classList.contains('paid');
+    if (isPaid) {
+      pill.classList.remove('paid'); pill.classList.add('unpaid'); pill.textContent = 'unpaid';
+    } else {
+      pill.classList.remove('unpaid'); pill.classList.add('paid'); pill.textContent = 'paid';
+      showToast((who === 'appletun' ? 'Appletun' : 'Flapple') + ' marked as paid');
+    }
+  }
+
+  function sendReminders() {
+    showToast('reminder sent to everyone unpaid');
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  renderDots('landing');
+</script>
+</body>
+</html>
